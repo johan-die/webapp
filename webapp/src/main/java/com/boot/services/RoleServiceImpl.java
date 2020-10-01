@@ -11,7 +11,7 @@ import com.boot.entities.Role;
 import com.boot.repositories.RoleRepository;
 
 @Service
-@Profile("springdatajpa")
+//@Profile("springdatajpa")
 public class RoleServiceImpl implements RoleService {
 
     private RoleRepository roleRepository;

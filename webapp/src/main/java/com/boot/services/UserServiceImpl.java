@@ -14,7 +14,7 @@ import com.boot.services.security.EncryptionService;
 
 
 @Service
-@Profile("springdatajpa")
+//@Profile("springdatajpa")
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
