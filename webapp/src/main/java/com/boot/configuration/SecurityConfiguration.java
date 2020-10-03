@@ -19,13 +19,6 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-  private AuthenticationProvider authenticationProvider;
-
-  @Autowired
-  @Qualifier("daoAuthenticationProvider")
-  public void setAuthenticationProvider(AuthenticationProvider authenticationProvider) {
-      this.authenticationProvider = authenticationProvider;
-  }
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
@@ -36,24 +29,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
 	}
-//	@Bean
-//	@Override
-//	public UserDetailsService userDetailsService() {
-//		UserDetails user =
-//			 User.withDefaultPasswordEncoder()
-//				.username("user")
-//				.password("user")
-//				.roles("USER")
-//				.build();
-//		UserDetails admin =
-//				User.withDefaultPasswordEncoder()
-//				.username("admin")
-//				.password("admin")
-//				.roles("ADMIN")
-//				.build();
-//
-//		return new InMemoryUserDetailsManager(user,admin);
-//	}
 	@Bean
 	public PasswordEncoder passwordEncoder(StrongPasswordEncryptor passwordEncryptor){
 	    PasswordEncoder passwordEncoder = new PasswordEncoder();
@@ -68,7 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    return daoAuthenticationProvider;
 	}
 	@Autowired
-	public void configureAuthManager(AuthenticationManagerBuilder authenticationManagerBuilder){
+	public void configureAuthManager(AuthenticationManagerBuilder authenticationManagerBuilder, @Qualifier("daoAuthenticationProvider") AuthenticationProvider authenticationProvider){
 	    authenticationManagerBuilder.authenticationProvider(authenticationProvider);
 	}
 }

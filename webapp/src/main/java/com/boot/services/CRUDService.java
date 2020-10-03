@@ -3,7 +3,7 @@ package com.boot.services;
 import java.util.List;
 
 public interface CRUDService<T> {
-    List<?> listAll();
+    List<T> listAll();
 
     T getById(Integer id);
 
